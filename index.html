@@ -132,15 +132,23 @@
             line-height: 1.7;
         }
 
+        .hero-sections-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--color-text);
+            letter-spacing: -0.01em;
+        }
+
         .hero-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             padding: 32px;
             background: var(--color-surface);
             border-radius: 12px;
             border: 1px solid var(--color-border);
-            max-width: 600px;
+            max-width: 800px;
         }
 
         .hero-section-item {
@@ -259,6 +267,34 @@
             height: 16px;
         }
 
+        .learn-more-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--color-accent);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.15rem;
+            padding: 16px 32px;
+            border-radius: 10px;
+            margin-top: 40px;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        .learn-more-box:hover {
+            background: var(--color-accent-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .learn-more-box svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* What/Why Section */
         .intro-section {
             background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
@@ -343,6 +379,10 @@
                 font-size: 2.5rem;
             }
 
+            .hero-sections {
+                grid-template-columns: 1fr;
+            }
+
             .intro-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -381,6 +421,7 @@
                 <h1>Agentic Transformation: A Structured Approach</h1>
                 <p class="hero-subtitle">Adopt an agentic mindset across your enterprise. Transform how your organization thinks, operates, and delivers value through human-AI collaboration.</p>
 
+                <h3 class="hero-sections-title">Your 7 Step Process</h3>
                 <div class="hero-sections">
                     <div class="hero-section-item">
                         <span class="section-number">01</span>
@@ -421,10 +462,6 @@
                         <h2>What is Agentic Transformation?</h2>
                         <p>Agentic transformation is the systematic integration of autonomous AI agents into an organization's core processes. Unlike traditional automation, agentic systems can reason, plan, and execute complex tasks with minimal human intervention.</p>
                         <p>This represents a fundamental shift in how work gets done. Agents don't just follow scripts—they understand context, make decisions within defined boundaries, and collaborate with both humans and other agents to achieve outcomes.</p>
-
-                        <h2 style="margin-top: 40px;">Why Pursue This Transformation?</h2>
-                        <p>Organizations face increasing complexity while talent remains constrained. Agentic systems allow you to scale expertise, reduce cognitive load on knowledge workers, and respond to market changes faster than traditional approaches allow.</p>
-                        <p>The goal isn't replacement—it's augmentation. Human judgment remains essential for strategy, ethics, and novel situations. Agents handle the predictable, the repetitive, and the data-intensive, freeing people to focus on what humans do best.</p>
                     </div>
                     <div class="highlight-box">
                         <h3>Core Transformation Outcomes</h3>
@@ -461,10 +498,6 @@
                         <h3>Success Metrics</h3>
                         <p>Quantifiable measures tied to business outcomes—not just technical deployment metrics. Focus on efficiency gains, error reduction, and capability expansion.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>Scope Definition</h3>
-                        <p>Clear boundaries on which processes, departments, and use cases are in scope for each transformation phase. Prevents scope creep while enabling focused execution.</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -488,10 +521,6 @@
                     <div class="content-card">
                         <h3>Integration Architecture</h3>
                         <p>Technical strategy for how agents will connect with existing systems, data sources, and workflows while maintaining security and performance standards.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Change Management</h3>
-                        <p>Plan for how the organization will adapt to working alongside autonomous agents, including training, communication, and role evolution.</p>
                     </div>
                 </div>
             </div>
@@ -517,12 +546,8 @@
                         <h3>Responsibility Allocation</h3>
                         <p>Explicit assignment of accountability between human operators and autonomous agents. Clear escalation paths when agents encounter situations outside their authority.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>Continuous Monitoring</h3>
-                        <p>Real-time oversight of agent behavior with automated alerts for anomalies. Governance is embedded in operations, not a periodic review exercise.</p>
-                    </div>
                 </div>
-                <a href="https://agenticgovernance.net/" class="learn-more" target="_blank" rel="noopener">
+                <a href="https://agenticgovernance.net/" class="learn-more-box" target="_blank" rel="noopener">
                     Learn more
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -551,10 +576,6 @@
                         <h3>Integration Phase</h3>
                         <p>Multi-agent systems working together across organizational boundaries. Complex workflows handled by coordinated agent teams with human oversight.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>Optimization Phase</h3>
-                        <p>Continuous improvement of agent performance based on operational data. Expansion of agent capabilities based on proven track record.</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -578,10 +599,6 @@
                     <div class="content-card">
                         <h3>Financial Operations</h3>
                         <p>Invoice processing, reconciliation, and reporting automated with agents. Exception handling and approvals routed to appropriate human decision-makers.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>HR & Administrative</h3>
-                        <p>Employee onboarding, benefits administration, and policy inquiries handled by agents. Human HR partners engage on sensitive matters and strategic initiatives.</p>
                     </div>
                 </div>
             </div>
@@ -607,10 +624,6 @@
                         <h3>Predictive Operations</h3>
                         <p>Agents that monitor conditions, predict issues, and take preventive action. Shift from reactive to proactive operational management.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>Adaptive Customer Experience</h3>
-                        <p>Personalized customer interactions orchestrated by agents across channels. Each customer relationship managed with consistency and context awareness.</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -635,12 +648,8 @@
                         <h3>Business Enablement</h3>
                         <p>Working with business units to identify opportunities and translate requirements into agentic solutions. Bridge between technical capabilities and business needs.</p>
                     </div>
-                    <div class="content-card">
-                        <h3>Continuous Improvement</h3>
-                        <p>Analyzing agent performance data to identify optimization opportunities. Systematic enhancement of agent capabilities based on operational experience.</p>
-                    </div>
                 </div>
-                <a href="https://agenticservicegroup.com/" class="learn-more" target="_blank" rel="noopener">
+                <a href="https://agenticservicegroup.com/" class="learn-more-box" target="_blank" rel="noopener">
                     Learn more
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
