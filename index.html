@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Transformation Program</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0b;
+            --color-surface: #141417;
+            --color-surface-elevated: #1c1c21;
+            --color-border: #2a2a32;
+            --color-text: #e8e8ed;
+            --color-text-muted: #8b8b96;
+            --color-accent: #6366f1;
+            --color-accent-soft: #4f46e5;
+            --color-accent-glow: rgba(99, 102, 241, 0.15);
+            --color-success: #22c55e;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            background: var(--color-accent-glow);
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin-bottom: 48px;
+            line-height: 1.7;
+        }
+
+        .hero-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            padding: 24px;
+            background: var(--color-surface);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .hero-section-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .hero-section-item:hover {
+            background: var(--color-surface-elevated);
+        }
+
+        .hero-section-item a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .section-number {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            font-weight: 500;
+            min-width: 28px;
+        }
+
+        /* Main Sections */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .section-header {
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        section .description {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 720px;
+            line-height: 1.8;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .content-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .content-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .content-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .content-card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 32px;
+            transition: gap 0.2s;
+        }
+
+        .learn-more:hover {
+            gap: 12px;
+        }
+
+        .learn-more svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* What/Why Section */
+        .intro-section {
+            background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .intro-content h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
+        .intro-content p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+        }
+
+        .highlight-box li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .highlight-box li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-box li::before {
+            content: "→";
+            color: var(--color-accent);
+            margin-right: 12px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-content a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-content a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .intro-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Agentic<span>Transformation</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#charter">Charter</a></li>
+                    <li><a href="#strategy">Strategy</a></li>
+                    <li><a href="#governance">Governance</a></li>
+                    <li><a href="#roadmap">Roadmap</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <span class="hero-badge">TRANSFORMATION FRAMEWORK</span>
+                <h1>Building the Agentic Enterprise</h1>
+                <p class="hero-subtitle">A structured approach to integrating autonomous AI agents into your organization's operations, decision-making, and service delivery.</p>
+
+                <div class="hero-sections">
+                    <div class="hero-section-item">
+                        <span class="section-number">01</span>
+                        <a href="#charter">Transformation Charter & Team</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">02</span>
+                        <a href="#strategy">Agentic Strategy</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">03</span>
+                        <a href="#governance">Governance Framework</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">04</span>
+                        <a href="#roadmap">Agentic Roadmap</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">05</span>
+                        <a href="#uplifts">Front & Backoffice Uplifts</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">06</span>
+                        <a href="#programs">Strategic Agentic Programs</a>
+                    </div>
+                    <div class="hero-section-item">
+                        <span class="section-number">07</span>
+                        <a href="#service-group">Agentic Service Group</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="intro-section">
+            <div class="container">
+                <div class="intro-content">
+                    <div>
+                        <h2>What is Agentic Transformation?</h2>
+                        <p>Agentic transformation is the systematic integration of autonomous AI agents into an organization's core processes. Unlike traditional automation, agentic systems can reason, plan, and execute complex tasks with minimal human intervention.</p>
+                        <p>This represents a fundamental shift in how work gets done. Agents don't just follow scripts—they understand context, make decisions within defined boundaries, and collaborate with both humans and other agents to achieve outcomes.</p>
+
+                        <h2 style="margin-top: 40px;">Why Pursue This Transformation?</h2>
+                        <p>Organizations face increasing complexity while talent remains constrained. Agentic systems allow you to scale expertise, reduce cognitive load on knowledge workers, and respond to market changes faster than traditional approaches allow.</p>
+                        <p>The goal isn't replacement—it's augmentation. Human judgment remains essential for strategy, ethics, and novel situations. Agents handle the predictable, the repetitive, and the data-intensive, freeing people to focus on what humans do best.</p>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>Core Transformation Outcomes</h3>
+                        <ul>
+                            <li>Autonomous task execution within defined guardrails</li>
+                            <li>Continuous operation without human bottlenecks</li>
+                            <li>Consistent quality across high-volume processes</li>
+                            <li>Rapid scaling without proportional headcount growth</li>
+                            <li>Real-time adaptation to changing conditions</li>
+                            <li>Institutional knowledge preserved and applied systematically</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="charter">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">01</div>
+                    <h2>Transformation Charter & Team</h2>
+                    <p class="description">Establishing clear ownership, scope, and accountability for the agentic transformation initiative. The charter defines what success looks like and who is responsible for getting there.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Executive Sponsorship</h3>
+                        <p>Senior leadership commitment with decision-making authority over budget, resources, and organizational changes required for transformation success.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Cross-Functional Team</h3>
+                        <p>Representatives from technology, operations, legal, compliance, and business units working together to ensure comprehensive coverage of transformation requirements.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Success Metrics</h3>
+                        <p>Quantifiable measures tied to business outcomes—not just technical deployment metrics. Focus on efficiency gains, error reduction, and capability expansion.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Scope Definition</h3>
+                        <p>Clear boundaries on which processes, departments, and use cases are in scope for each transformation phase. Prevents scope creep while enabling focused execution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">02</div>
+                    <h2>Agentic Strategy</h2>
+                    <p class="description">Defining where and how autonomous agents will create value in your organization. Strategy connects business objectives to specific agentic capabilities and deployment priorities.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Use Case Identification</h3>
+                        <p>Systematic evaluation of business processes to identify high-value opportunities for agentic automation based on volume, complexity, and strategic importance.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Capability Assessment</h3>
+                        <p>Mapping required agent capabilities against available technologies and organizational readiness to determine feasibility and investment requirements.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Integration Architecture</h3>
+                        <p>Technical strategy for how agents will connect with existing systems, data sources, and workflows while maintaining security and performance standards.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Change Management</h3>
+                        <p>Plan for how the organization will adapt to working alongside autonomous agents, including training, communication, and role evolution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="governance">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">03</div>
+                    <h2>Governance Framework</h2>
+                    <p class="description">Establishing control structures, accountability mechanisms, and oversight processes for autonomous AI systems. Governance ensures agents operate within acceptable boundaries while enabling their effectiveness.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Action Auditability</h3>
+                        <p>Structured logging and traceability for all agent actions. Every decision and execution step can be reviewed, with human veto capabilities for critical operations.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Boundary Controls</h3>
+                        <p>Clear definition of what agents can and cannot do. Tool scope restrictions, memory isolation, and rollback capabilities ensure agents stay within their intended operating parameters.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Responsibility Allocation</h3>
+                        <p>Explicit assignment of accountability between human operators and autonomous agents. Clear escalation paths when agents encounter situations outside their authority.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Continuous Monitoring</h3>
+                        <p>Real-time oversight of agent behavior with automated alerts for anomalies. Governance is embedded in operations, not a periodic review exercise.</p>
+                    </div>
+                </div>
+                <a href="https://agenticgovernance.net/" class="learn-more" target="_blank" rel="noopener">
+                    Learn more
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="roadmap">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">04</div>
+                    <h2>Agentic Roadmap</h2>
+                    <p class="description">Phased deployment plan that sequences agent rollouts based on dependencies, risk levels, and organizational readiness. The roadmap balances ambition with pragmatic execution.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Foundation Phase</h3>
+                        <p>Infrastructure setup, data preparation, and initial pilot deployments. Low-risk use cases that build organizational confidence and technical capabilities.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Expansion Phase</h3>
+                        <p>Broader deployment across departments and processes. Increased agent autonomy as governance practices mature and trust is established.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Integration Phase</h3>
+                        <p>Multi-agent systems working together across organizational boundaries. Complex workflows handled by coordinated agent teams with human oversight.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Optimization Phase</h3>
+                        <p>Continuous improvement of agent performance based on operational data. Expansion of agent capabilities based on proven track record.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="uplifts">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">05</div>
+                    <h2>Front & Backoffice Uplifts</h2>
+                    <p class="description">Targeted improvements to customer-facing and internal operations through agentic capabilities. Both domains benefit from autonomous execution while requiring different governance approaches.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Customer Service Agents</h3>
+                        <p>Autonomous handling of customer inquiries, issue resolution, and proactive outreach. Escalation to human agents for complex or sensitive situations.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Sales Support Automation</h3>
+                        <p>Lead qualification, proposal generation, and follow-up coordination managed by agents. Sales professionals focus on relationship building and closing.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Financial Operations</h3>
+                        <p>Invoice processing, reconciliation, and reporting automated with agents. Exception handling and approvals routed to appropriate human decision-makers.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>HR & Administrative</h3>
+                        <p>Employee onboarding, benefits administration, and policy inquiries handled by agents. Human HR partners engage on sensitive matters and strategic initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programs">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">06</div>
+                    <h2>Strategic Agentic Programs</h2>
+                    <p class="description">Major initiatives that leverage agentic capabilities to achieve significant business outcomes. These programs represent substantial investment and organizational commitment.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Intelligent Process Automation</h3>
+                        <p>End-to-end automation of core business processes with agents handling decision-making, not just task execution. Significant reduction in cycle times and manual intervention.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Knowledge Management</h3>
+                        <p>Agents that capture, organize, and apply institutional knowledge. Expertise becomes accessible and consistently applied across the organization.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Predictive Operations</h3>
+                        <p>Agents that monitor conditions, predict issues, and take preventive action. Shift from reactive to proactive operational management.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Adaptive Customer Experience</h3>
+                        <p>Personalized customer interactions orchestrated by agents across channels. Each customer relationship managed with consistency and context awareness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="service-group">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">07</div>
+                    <h2>Agentic Service Group</h2>
+                    <p class="description">A dedicated organizational unit responsible for developing, deploying, and maintaining agentic capabilities across the enterprise. The service group operates as an internal center of excellence.</p>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Agent Development</h3>
+                        <p>Building and configuring agents for specific use cases. Standardized development practices ensure quality, security, and maintainability across all deployments.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Platform Operations</h3>
+                        <p>Running the infrastructure that hosts and orchestrates agents. Monitoring, scaling, and incident response to maintain reliable agent operations.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Business Enablement</h3>
+                        <p>Working with business units to identify opportunities and translate requirements into agentic solutions. Bridge between technical capabilities and business needs.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Continuous Improvement</h3>
+                        <p>Analyzing agent performance data to identify optimization opportunities. Systematic enhancement of agent capabilities based on operational experience.</p>
+                    </div>
+                </div>
+                <a href="https://agenticservicegroup.com/" class="learn-more" target="_blank" rel="noopener">
+                    Learn more
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 <a href="https://legendary.ai" target="_blank" rel="noopener">Legendary AI</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
