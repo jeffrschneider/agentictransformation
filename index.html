@@ -375,6 +375,180 @@
             color: var(--color-accent);
         }
 
+        /* Section Divider */
+        .section-divider {
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .divider-line {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider-line::before,
+        .divider-line::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+        }
+
+        .divider-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-glow);
+            border: 1px solid var(--color-accent);
+            border-radius: 50%;
+            color: var(--color-accent);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+            padding: 100px 0 120px;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .timeline-header p {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Visual Timeline */
+        .timeline-visual {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline-track {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+            transform: translateY(-50%);
+        }
+
+        .timeline-track-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-success));
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        .timeline-phases {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .timeline-phase-marker {
+            width: 24px;
+            height: 24px;
+            background: var(--color-accent);
+            border: 4px solid var(--color-bg);
+            border-radius: 50%;
+            margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            position: relative;
+        }
+
+        .timeline-phase:last-child .timeline-phase-marker {
+            background: var(--color-success);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .timeline-phase-content {
+            text-align: center;
+            max-width: 180px;
+        }
+
+        .timeline-phase-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .timeline-phase:last-child .timeline-phase-label {
+            color: var(--color-success);
+        }
+
+        .timeline-phase-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-phase-desc {
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .timeline-note {
+            text-align: center;
+            margin-top: 64px;
+            padding: 24px 32px;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .timeline-note p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .timeline-note strong {
+            color: var(--color-text);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -396,6 +570,36 @@
 
             section {
                 padding: 60px 0;
+            }
+
+            .timeline-phases {
+                flex-direction: column;
+                gap: 48px;
+            }
+
+            .timeline-track {
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                right: auto;
+                width: 4px;
+                height: 100%;
+                transform: translateX(-50%);
+            }
+
+            .timeline-phase {
+                flex-direction: row;
+                gap: 24px;
+            }
+
+            .timeline-phase-marker {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .timeline-phase-content {
+                text-align: left;
+                max-width: none;
             }
         }
     </style>
@@ -448,10 +652,6 @@
                     <div class="hero-section-item">
                         <span class="section-number">06</span>
                         <a href="#service-group">Agentic Service Group</a>
-                    </div>
-                    <div class="hero-section-item">
-                        <span class="section-number">07</span>
-                        <a href="#timeline">Timeline & Investment</a>
                     </div>
                 </div>
             </div>
@@ -636,30 +836,68 @@
             </div>
         </section>
 
-        <section id="timeline">
+        <!-- Divider -->
+        <div class="section-divider">
             <div class="container">
-                <div class="section-header">
-                    <div class="section-label">07</div>
-                    <h2>Timeline & Investment</h2>
-                    <p class="description">While timelines and investment levels vary based on organizational size and complexity, understanding typical patterns helps set realistic expectations for the transformation journey.</p>
+                <div class="divider-line">
+                    <div class="divider-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
                 </div>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <h3>Foundation Building</h3>
-                        <p>The initial 2-4 quarters focus on establishing the transformation foundation: governance frameworks, team formation, technology infrastructure, and pilot programs. This phase builds the organizational muscle for broader change.</p>
+            </div>
+        </div>
+
+        <section id="timeline" class="timeline-section">
+            <div class="container">
+                <div class="timeline-header">
+                    <h2>Timeline & Investment</h2>
+                    <p>While timelines and investment levels vary based on organizational size and complexity, understanding typical patterns helps set realistic expectations for the transformation journey.</p>
+                </div>
+
+                <div class="timeline-visual">
+                    <div class="timeline-track">
+                        <div class="timeline-track-fill"></div>
                     </div>
-                    <div class="content-card">
-                        <h3>Business Engagement</h3>
-                        <p>Following the foundation phase, sincere business engagement and process reengineering begins. This is where the transformation moves from infrastructure to impact, with business units actively redesigning how work gets done.</p>
+                    <div class="timeline-phases">
+                        <div class="timeline-phase">
+                            <div class="timeline-phase-marker"></div>
+                            <div class="timeline-phase-content">
+                                <div class="timeline-phase-label">Q1–Q4</div>
+                                <h3 class="timeline-phase-title">Foundation Building</h3>
+                                <p class="timeline-phase-desc">Governance frameworks, team formation, infrastructure, and pilot programs</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="timeline-phase-marker"></div>
+                            <div class="timeline-phase-content">
+                                <div class="timeline-phase-label">Q5–Q8</div>
+                                <h3 class="timeline-phase-title">Business Engagement</h3>
+                                <p class="timeline-phase-desc">Process reengineering and business unit adoption at scale</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="timeline-phase-marker"></div>
+                            <div class="timeline-phase-content">
+                                <div class="timeline-phase-label">Q9–Q12</div>
+                                <h3 class="timeline-phase-title">Self-Funding Momentum</h3>
+                                <p class="timeline-phase-desc">Early wins generate savings that fund subsequent phases</p>
+                            </div>
+                        </div>
+                        <div class="timeline-phase">
+                            <div class="timeline-phase-marker"></div>
+                            <div class="timeline-phase-content">
+                                <div class="timeline-phase-label">Ongoing</div>
+                                <h3 class="timeline-phase-title">Accelerating Velocity</h3>
+                                <p class="timeline-phase-desc">AI agents facilitate change, accelerating adoption enterprise-wide</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content-card">
-                        <h3>Self-Funding Momentum</h3>
-                        <p>While initial investment can be significant, early wins often generate savings and efficiency gains that fund subsequent phases. Strategic sequencing of use cases creates a self-reinforcing investment cycle.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3>Accelerating Velocity</h3>
-                        <p>As AI and agent capabilities improve and employees become more proficient, transformation velocity increases. Notably, AI agents themselves begin facilitating the change—automating transformation activities and accelerating adoption across the enterprise.</p>
-                    </div>
+                </div>
+
+                <div class="timeline-note">
+                    <p><strong>Investment Pattern:</strong> Initial investment can be significant, but strategic sequencing of use cases creates a self-reinforcing cycle where early efficiency gains fund subsequent transformation phases.</p>
                 </div>
             </div>
         </section>
